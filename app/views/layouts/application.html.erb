@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MusicConcertNetwork</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+  <ul class="list-inline">
+    <li><%= link_to('Home', '/') %></li>
+    <li><%= link_to('+ Add a new concert', new_concert_path) %></li>
+    <li><%= link_to('+ Popular concerts', popular_path) %></li>
+    <li class="divider"></li>
+    <li><%= link_to('See all concerts', concerts_path) %></li>
+  </ul>   
+  </div>
+</nav>
+</header>
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-8">
+        <%= yield %>
+      </div>
+      <div class="col-md-4">
+
+        <div class="list-group">
+
+        <h4> Later this month </h4>
+        <% Concert.get_concerts_month.each do |concert| %>
+
+            <span class="list-group-item">
+              <h4 class="list-group-item-heading"><strong><%= link_to(concert.band, concert_path(concert.id)) %></strong></h4>
+                <p class="list-group-item-text"><strong>Date:</strong><%= " #{concert.date}" %></p></p>
+                <p class="list-group-item-text"><p><strong>Where: </strong><%= "#{concert.venue}, #{concert.city}"%></p>
+                <p class="list-group-item-text"><p><strong>How much:</strong><%= " #{concert.price} €"%></p>
+                <p class="list-group-item-text"><p><strong>Tell me more:</strong><%= " #{concert.description}" %></p>
+              </span>  
+        <% end %>      
+        </div> 
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <nav class="navbar navbar-default navbar-fixed-bottom ">
+      <div class="container">
+     
+      <p> I'm a footer </p>
+
+      </div>
+    </nav>
+  </footer>
+</body>
+
+</html>

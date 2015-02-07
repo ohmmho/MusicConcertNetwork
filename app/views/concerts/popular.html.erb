@@ -1,0 +1,9 @@
+<% @sorted_concerts.each do |concert| %>
+      
+      <div class="panel panel-default">
+        <div class="panel-body">
+       <%= link_to(concert.band, concert_path(concert.id)) %> - <%= concert.city %> - <%= concert.description %>
+        </div>
+      </div>   
+
+  <% end %>

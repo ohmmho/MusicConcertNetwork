@@ -1,0 +1,34 @@
+
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3><%= "#{@concert.band}" %></h3>
+  </div>
+  <div class="panel-body">
+    <p><strong>Date:</strong><%= " #{@concert.date}" %></o>
+    <p><strong>Where: </strong><%= "#{@concert.venue}, #{@concert.city}"%></p>
+    <p><strong>How much:</strong><%= " #{@concert.price} €"%></p>
+    <p><strong>Tell me more:</strong><%= " #{@concert.description}" %></p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <% @concert.comments.each do |comment| %>
+
+    <div class="panel-heading"> <strong><%= comment.mail %></strong> has said at <%= comment.created_at %></div>
+    <div class="panel-body">
+      <%= comment.comment_field %>
+    </div>
+  <% end %>
+</div>
+
+<%= form_for [@concert, @comment] do |f| %>
+
+  <%= f.label "email" %> <br>
+  <%= f.email_field :mail %>
+  <br>
+  <%= f.label "Comment" %> <br>
+  <%= f.text_area :comment_field %>
+  <br>
+
+  <%= f.submit 'Send comment' %>
+<% end %>
